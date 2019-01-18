@@ -1,0 +1,12 @@
+pip install https://codeload.github.com/sshwsfc/xadmin/zip/django2
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+
+pip freeze > requirements.txt
+pip install -r requirements.txt
+
+django-admin startproject bolg
+python manage.py startapp user
+
+pip install mysqlclient
