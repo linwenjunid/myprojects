@@ -10,3 +10,18 @@ django-admin startproject bolg
 python manage.py startapp user
 
 pip install mysqlclient
+
+ChangeFieldWidgetWrapper
+WidgetTypeSelect
+
+
+# xadmin/forms.py
+class MultiCaptchaForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super(MultiCaptchaForm, self).__init__(*args, **kwargs)
+        from captcha.fields import CaptchaField
+        self.fields['captcha'] = CaptchaField(error_messages={'invalid': '验证码错误'})
+
+
+class AdminAuthenticationForm(MultiCaptchaForm):
+    pass

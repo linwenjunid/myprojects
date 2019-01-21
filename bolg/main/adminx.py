@@ -4,6 +4,7 @@ from xadmin.layout import Fieldset, Layout, Container, Col
 import xadmin
 
 
+# @xadmin.sites.register(Article)
 class ArticleAdmin:
     list_display = ("title", "user", "publish_time", "last_update_time")
     list_display_links = ("title",)
@@ -41,7 +42,6 @@ class ArticleAdmin:
 
 
 xadmin.site.register(Article, ArticleAdmin)
-
 
 
 @xadmin.sites.register(views.BaseAdminView)

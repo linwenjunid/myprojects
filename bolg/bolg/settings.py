@@ -47,9 +47,32 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'user',
     'main',
+    'captcha',
 ]
 
-
+# 验证码
+# 格式
+CAPTCHA_OUTPUT_FORMAT = u'%(text_field)s %(hidden_field)s %(image)s'
+# 噪点样式
+CAPTCHA_NOISE_FUNCTIONS = (
+    #'captcha.helpers.noise_null',       # 没有样式
+    'captcha.helpers.noise_arcs',       # 线
+    'captcha.helpers.noise_dots',       # 点
+)
+# 图片大小
+CAPTCHA_IMAGE_SIZE = (80, 57)
+# 字符个数
+CAPTCHA_LENGTH = 4
+# 文字倾斜
+CAPTCHA_LETTER_ROTATION = (-50,50)
+# 背景颜色
+CAPTCHA_BACKGROUND_COLOR = '#FFFFFF'
+# 文字颜色
+CAPTCHA_FOREGROUND_COLOR = '#0A12E5'
+# 图片中的文字为随机英文字母，如 mdsh
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.random_char_challenge'
+# 图片中的文字为数字表达式，如1+2=
+# CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -66,7 +89,7 @@ ROOT_URLCONF = 'bolg.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates/'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -134,6 +157,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
 
 STATIC_URL = '/static/'
 MEDIA_URL  = '/media/'

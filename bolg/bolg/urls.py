@@ -15,14 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-import xadmin
 from django.conf import settings
 from django.conf.urls.static import static
 
 
+import xadmin
+# xadmin.autodiscover()
+# from xadmin.plugins import xversion
+# xversion.register_models()
+
+
 urlpatterns = [
     path('admin/', xadmin.site.urls),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls'), name='ckeditor'),
+    path('captcha/', include('captcha.urls'), name='captcha')
     ] + static(
         settings.STATIC_URL,
         document_root=settings.STATIC_ROOT
@@ -30,3 +36,4 @@ urlpatterns = [
         settings.MEDIA_URL,
         document_root=settings.MEDIA_ROOT
     )
+
