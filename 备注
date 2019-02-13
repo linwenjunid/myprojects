@@ -25,3 +25,12 @@ class MultiCaptchaForm(AuthenticationForm):
 
 class AdminAuthenticationForm(MultiCaptchaForm):
     pass
+
+
+pip install django-celery-results
+pip install django-celery-beat
+pip install eventlet
+
+# celery消费者启动
+celery -A bolg worker -l info -P eventlet
+celery -A bolg beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler

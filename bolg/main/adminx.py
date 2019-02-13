@@ -52,8 +52,8 @@ class BaseSetting(object):
 
 @xadmin.sites.register(views.CommAdminView)
 class GlobalSetting(object):
-    site_title = '学习'
-    site_footer = '关于我'
+    site_title = '我的学习'
+    site_footer = '关于学习'
     global_search_models = [Article, ]
     # 小图标
     global_models_icon = {

@@ -13,22 +13,23 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from __future__ import absolute_import, unicode_literals
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-
 import xadmin
-# xadmin.autodiscover()
-# from xadmin.plugins import xversion
-# xversion.register_models()
-
+xadmin.autodiscover()
+from xadmin.plugins import xversion
+xversion.register_models()
+from django.contrib import admin
 
 urlpatterns = [
     path('admin/', xadmin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls'), name='ckeditor'),
-    path('captcha/', include('captcha.urls'), name='captcha')
+    path('captcha/', include('captcha.urls'), name='captcha'),
+    path('',include('order.urls'), name='order')
     ] + static(
         settings.STATIC_URL,
         document_root=settings.STATIC_ROOT
