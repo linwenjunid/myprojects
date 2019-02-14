@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table border = "1">
+    <tr>
+        <th>订单名称</th><th>订单状态</th><th>操作人</th><th>操作</th>
+    </tr>
+{% for i in ins %}
+    <tr>
+    <td>{{ i.order }}</td>
+    <td>{{ i.status }}</td>
+    <td>{{ i.action_user }}</td>
+    <td>
+        {% if i.code == 0 %}
+            <a href="{% url 'do_action' i.id 6 %}">接受</a>
+        {% else %}
+            {% for action in i.status.actions.all %}
+            {% if action.id != 3 %}
+            <a href="{% url 'do_action' i.id action.id %}">{{action.action_name}}</a>
+            {% endif %}
+            {% endfor %}
+        {% endif %}
+    </td>
+    </tr>
+{% endfor %}
+{% for i in pre_ins %}
+    <tr>
+    <td>{{ i.order }}</td>
+    <td>{{ i.status }}</td>
+    <td>{{ i.pre_action_user }}</td>
+    <td><a href="{% url 'do_action' i.id 3 %}">撤回</a></td>
+    </tr>
+{% endfor %}
+</table>
+
+</body>
+</html>
