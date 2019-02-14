@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'flow',
     'order',
     'task',
+    'echart',
 ]
 
 # 验证码
