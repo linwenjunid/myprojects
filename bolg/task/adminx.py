@@ -66,7 +66,7 @@ class PeriodicTaskAdmin:
 
 
 class TaskResultAdmin:
-    list_display = ("task_id", "task_name","status","result")
+    list_display = ("task_name","status","result")
 
 
 xadmin.site.register(TaskResult,TaskResultAdmin)

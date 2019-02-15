@@ -29,7 +29,7 @@ def scatter3D():
     data = [[random.randint(0, 100), random.randint(0, 100), random.randint(0, 100)] for _ in range(80)]
     range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
                    '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
-    scatter3D = Scatter3D("3D scattering plot demo", width=500, height=250)
+    scatter3D = Scatter3D("3D scattering plot demo", width=500, height=500)
     scatter3D.add("", data, is_visualmap=True, visual_range_color=range_color)
     return scatter3D
 
@@ -45,7 +45,7 @@ def line3d():
     range_color = [
         '#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
         '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
-    line3d = Line3D("3D line plot demo", width=500, height=250)
+    line3d = Line3D("3D line plot demo", width=500, height=500)
     line3d.add("", _data, is_visualmap=True,
                visual_range_color=range_color, visual_range=[0, 30],
                is_grid3D_rotate=True, grid3D_rotate_speed=180)
