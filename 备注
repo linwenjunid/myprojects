@@ -36,3 +36,14 @@ celery -A bolg worker -l info -P eventlet
 celery -A bolg beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
 
 python manage.py collectstatic
+
+#调试神器
+assert False
+
+#change_list.html
+<script type="text/javascript">
+function update_status(obj){
+    window.location.href=obj.getAttribute('values')+this.location.search
+}
+</script>
+

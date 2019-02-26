@@ -94,3 +94,47 @@ class gridView(BaseAdminView):
             script_list=echart.get_js_dependencies()
         )
         return render(request, template_name, context)
+
+
+class wordcloudView(BaseAdminView):
+    def get(self, request, *args, **kwargs):
+        from PIL import Image
+        from wordcloud import WordCloud, STOPWORDS
+        import jieba
+        from io import BytesIO
+        from os import path
+        from django.conf import settings
+        import numpy as np
+        from django.http import HttpResponse
+
+        with Image.open(path.join(settings.STATIC_ROOT, '原图.jpg')) as i:
+            image_mask = np.array(i)
+
+        with open(path.join(settings.STATIC_ROOT, '数据.txt'), 'rb') as f:
+            text = " ".join(jieba.cut(f.read()))
+
+        stopwords = set(STOPWORDS)
+        stopwords.add("新闻")
+        stopwords.add("百度")
+        stopwords.add("公告")
+        stopwords.add("关键词")
+        # 配置词云
+        wc = WordCloud(
+            background_color="white",
+            max_words=20000,
+            stopwords=stopwords,
+            font_path="simsun.ttc",
+            mask=image_mask)
+        # 生成词云
+        wc.generate(text)
+        # 存储到文件
+        # wc.to_file(path.join(d, '结果.png'))
+        img = wc.to_image()
+
+        # byte_io = BytesIO()
+        # img.save(byte_io, 'PNG')
+        # byte_io.seek(0)
+
+        response = HttpResponse(content_type="image/png")
+        img.save(response,'PNG')
+        return response

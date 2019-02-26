@@ -62,23 +62,23 @@ class GlobalSetting(object):
     # 菜单折叠
     menu_style = 'default'  # 'accordion','default'
 
-    def get_site_menu(self):
-        return [
-            {
-                'title':'统计分析',
-                'perm':self.get_model_perm(Article,'view'),
-                'icon':'fa fa-bar-chart-o',
-                'menus':(
-                    {
-                        'title': '统计',
-                        'url':self.get_model_url(Article, 'changelist'),
-                        'icon': 'fa fa-cny',
-                    },
-                    {
-                        'title': '分析',
-                        'url': self.get_admin_url('scatter'),
-                        'icon': 'fa fa-user-md',
-                    },
-                )
-            }
-        ]
+    # def get_site_menu(self):
+    #     return [
+    #         {
+    #             'title':'统计分析',
+    #             'perm':self.get_model_perm(Article,'view'),
+    #             'icon':'fa fa-bar-chart-o',
+    #             'menus':(
+    #                 {
+    #                     'title': '统计',
+    #                     'url':self.get_model_url(Article, 'changelist'),
+    #                     'icon': 'fa fa-cny',
+    #                 },
+    #                 {
+    #                     'title': '分析',
+    #                     'url': self.get_admin_url('scatter'),
+    #                     'icon': 'fa fa-user-md',
+    #                 },
+    #             )
+    #         }
+    #     ]
