@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'order',
     'task',
     'echart',
+    'mptt',
+    'tree',
 ]
 
 # 验证码
@@ -222,3 +224,10 @@ CELERY_RESULT_BACKEND = 'django-db' # BACKEND配置，这里使用redis
 # CELERY_RESULT_BACKEND = 'redis://:hadoop@192.168.134.200:6379/1' # BACKEND配置，这里使用redis
 
 CELERY_RESULT_SERIALIZER = 'json' # 结果序列化方案
+
+CACHES = {
+            'default': {
+                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+                'LOCATION': 'unique-snowflake',#给缓存放置的内存区设置一个名字
+            }
+        }

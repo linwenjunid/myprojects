@@ -27,7 +27,8 @@ urlpatterns = [
     path('admin/', xadmin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls'), name='ckeditor'),
     path('captcha/', include('captcha.urls'), name='captcha'),
-    path('',include('order.urls'), name='order')
+    path('',include('order.urls'), name='order'),
+    path('wc/',include('echart.urls'), name='wc')
     ] + static(
         settings.STATIC_URL,
         document_root=settings.STATIC_ROOT
