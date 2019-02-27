@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load mptt_tags %}
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    {% recursetree comments %}
+        <li>
+            {{ node.content }}--{{ node.created_time }} by {{ node.user }}
+            {% if not node.is_leaf_node %}
+                <ul>
+                    {{ children }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+</ul>
+</body>
+</html>
