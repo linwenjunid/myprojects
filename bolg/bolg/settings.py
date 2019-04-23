@@ -64,15 +64,15 @@ CAPTCHA_OUTPUT_FORMAT = u'%(text_field)s %(hidden_field)s %(image)s'
 # 噪点样式
 CAPTCHA_NOISE_FUNCTIONS = (
     #'captcha.helpers.noise_null',       # 没有样式
-    'captcha.helpers.noise_arcs',       # 线
+    # 'captcha.helpers.noise_arcs',       # 线
     'captcha.helpers.noise_dots',       # 点
 )
 # 图片大小
-CAPTCHA_IMAGE_SIZE = (80, 57)
+CAPTCHA_IMAGE_SIZE = (80, 40)
 # 字符个数
 CAPTCHA_LENGTH = 4
 # 文字倾斜
-CAPTCHA_LETTER_ROTATION = (-50,50)
+CAPTCHA_LETTER_ROTATION = (-20,20)
 # 背景颜色
 CAPTCHA_BACKGROUND_COLOR = '#FFFFFF'
 # 文字颜色

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.db import connection
-from pyecharts import Scatter3D, Line3D, Grid, Bar, Line
+from pyecharts import Scatter3D, Line3D, Grid, Bar, Line, Graph
 import random,math
 from xadmin.views import BaseAdminView
 from django.views.decorators.cache import cache_page
@@ -185,3 +185,31 @@ def wordcloud(request):
     response = HttpResponse(content_type="image/png")
     img.save(response,'PNG')
     return response
+
+
+class neo4jView(BaseAdminView):
+    def get(self, request, *args, **kwargs):
+        from py2neo import Graph as neo4j
+        template_name = 'echart/echart.html'
+        echart = Graph("关系图谱")
+        graph = neo4j('http://192.168.134.4:7474', username='neo4j', password='hadoop')
+        data1 = graph.run("match(n1:Actor{name:'沈腾'})-[r1]->(m1:Movie) return n1.name,type(r1),m1.name;").to_table()
+        data2 = graph.run("match(n1:Actor{name:'沈腾'})-[r1]->(m1:Movie)<-[r2]-(n2:Actor) return n2.name,type(r2),m1.name;").to_table()
+        nodes = [{"name": "沈腾", "symbolSize": 10,"category":1},]
+        links = []
+        for d in data1:
+            nodes.append({"name": d[2], "symbolSize": 20,"category":0})
+            links.append({"source": d[0], "target": d[2]})
+        for d in data2:
+            nodes.append({"name": d[0], "symbolSize": 10,"category":1})
+            links.append({"source": d[0], "target": d[2]})
+        categories = ["电影","演员"]
+        # print(nodes)
+        # print(links)
+        echart.add("测试",nodes,links,categories=categories,is_label_show=True,is_focusnode=True,is_roam=True,is_rotatelabel=True,graph_repulsion=150)
+        context = dict(
+            myechart=echart.render_embed(),
+            host=REMOTE_HOST,
+            script_list=echart.get_js_dependencies()
+        )
+        return render(request, template_name, context)

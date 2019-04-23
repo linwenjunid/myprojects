@@ -1,5 +1,5 @@
 import xadmin
-from .views import scatter3DView, line3dView, gridView, wordcloudView
+from .views import scatter3DView, line3dView, gridView, wordcloudView, neo4jView
 from xadmin.views.website import IndexView
 from .models import xchart
 # Register your models here.
@@ -7,6 +7,7 @@ xadmin.site.register_view(r'scatter/$', scatter3DView, name='scatter')
 xadmin.site.register_view(r'line/$', line3dView, name='line')
 xadmin.site.register_view(r'grid/$', gridView, name='grid')
 xadmin.site.register_view(r'wordcloud/$', wordcloudView, name='wordcloud')
+xadmin.site.register_view(r'neo4j/$', neo4jView, name='neo4j')
 
 
 @xadmin.sites.register(IndexView)
